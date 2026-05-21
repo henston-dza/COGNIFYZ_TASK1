@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero-card">
+        <h1>Server-side rendering with Express and EJS</h1>
+        <div class="grid-layout">
+          <section class="panel">
+            <h2>Greeting form</h2>
+            <form method="POST" action="/greet" class="form-stack">
+              <label>
+                Your name
+                <input type="text" name="name" placeholder="John Doe" />
+              </label>
+              <button type="submit">Send greeting</button>
+            </form>
+          </section>
+
+          <section class="panel">
+            <h2>Feedback form</h2>
+            <form method="POST" action="/feedback" class="form-stack">
+              <label>
+                Your name
+                <input type="text" name="name" placeholder="John Doe" />
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" placeholder="john@example.com" />
+              </label>
+              <label>
+                Message
+                <textarea name="message" rows="5" placeholder="Share what you learned"></textarea>
+              </label>
+              <button type="submit">Submit feedback</button>
+            </form>
+          </section>
+        </div>
+      </section>
+
+      <section class="history-card">
+        <div class="card-heading">
+          <h2>Recent server submissions</h2>
+          <span><%= submissions.length %> stored in memory</span>
+        </div>
+
+        <% if (submissions.length > 0) { %>
+          <div class="submission-list">
+            <% submissions.forEach((entry) => { %>
+              <article class="submission-item">
+                <div>
+                  <strong><%= entry.type %></strong>
+                  <p><%= entry.name %></p>
+                </div>
+                <small><%= entry.submittedAt %></small>
+              </article>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <p class="empty-state">No forms have been submitted yet. Try one of the forms above and watch the server render a new page.</p>
+        <% } %>
+      </section>
+
+      
+    </main>
+  </body>
+</html>

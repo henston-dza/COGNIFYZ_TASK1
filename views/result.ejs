@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page-shell result-shell">
+      <section class="hero-card">
+        <h1><%= title %></h1>
+
+        <div class="result-box">
+          <% if (submission) { %>
+            <p><strong>Type:</strong> <%= submission.type %></p>
+            <p><strong>Name:</strong> <%= submission.name %></p>
+            <% if (submission.email) { %>
+              <p><strong>Email:</strong> <%= submission.email %></p>
+            <% } %>
+            <p><strong>Details:</strong> <%= submission.details %></p>
+            <p><strong>Submitted:</strong> <%= submittedAt %></p>
+          <% } else { %>
+            <p><%= message %></p>
+          <% } %>
+        </div>
+
+        <div class="action-row">
+          <a class="button-link" href="/">Back to forms</a>
+        </div>
+      </section>
+
+      <section class="history-card">
+        <div class="card-heading">
+          <h2>Latest in-memory submissions</h2>
+          <span><%= allSubmissions.length %> stored</span>
+        </div>
+
+        <% if (allSubmissions.length > 0) { %>
+          <div class="submission-list">
+            <% allSubmissions.forEach((entry) => { %>
+              <article class="submission-item">
+                <div>
+                  <strong><%= entry.type %></strong>
+                  <p><%= entry.name %></p>
+                </div>
+                <small><%= entry.submittedAt %></small>
+              </article>
+            <% }) %>
+          </div>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>
